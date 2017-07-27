@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Student = () => {
+const Student = ({name, class_year, percentage}) => {
 
   return (
     <tr>
-      <td>"...your code here"</td>
-      <td>"...your code here"</td>
-      <td>"...your code here"</td>
+      <td>{name}</td>
+      <td>{class_year}</td>
+      <td>{percentage}</td>
       <td>
         <button className="ui button left">
           Edit
