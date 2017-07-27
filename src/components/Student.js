@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Student = () => {
+const Student = ({studentDetails, selectCurrentStudent}) => {
 
   return (
-    <tr>
-      <td>"...your code here"</td>
-      <td>"...your code here"</td>
-      <td>"...your code here"</td>
+    <tr key={studentDetails.id}>
+      <td>{studentDetails.name}</td>
+      <td>{studentDetails.class_year}</td>
+      <td>{studentDetails.percentage}</td>
       <td>
-        <button className="ui button left">
+        <button className="ui button left" id={studentDetails.id} onClick={selectCurrentStudent}>
           Edit
         </button>
       </td>
