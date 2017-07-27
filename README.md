@@ -8,7 +8,7 @@ Part of what this code challenge is testing is your ability to follow given inst
 
 ## Setup
 1) First fork and clone down the backend repository and get the API running locally. The repo and directions to run it locally can be found here:
-https://github.com/learn-co-students/immersive-assessment-react-first-round-repeat-web-YOUR_CLASS_START_DATE
+https://github.com/learn-co-students/immersive-assessment-react-alt-first-round-backend-web-051517
 2) Fork and clone this repository.
 3) After cloning down the project, run `npm install`.
 4) You can boot up the server with `npm start`. It will run on `localhost:3000`.
