@@ -3,6 +3,7 @@ import CourseSelector from './CourseSelector'
 import EditStudent from './EditStudent'
 import StudentsList from './StudentsList'
 import courseList from '../courseList'
+const URL = 'http://localhost:3000/courses'
 
 class CourseContainer extends Component {
   constructor() {
@@ -37,24 +38,66 @@ class CourseContainer extends Component {
         }
       ],
       currentCourse: {},
-      currentStudent: {}
+      currentStudent: {},
+      allCourses: []
     }
   }
 
+  fetchAllCourses = () => {
+    fetch(URL)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      allCourses: data
+    }))
+  }
+
+  componentWillMount() {
+    this.fetchAllCourses()
+  }
+
+  handleChangeCourses = (event) => {
+    this.setState({
+      currentCourse:  event.target.value,
+      students: this.state.allCourses.filter(course => course.students === event.target.value)
+    })
+    console.log(event.target.value, "tar")
+  }
+
+  handleChangeCurrentStudents = (event) => {
+    event.preventDefault()
+    console.log(event.target.value, "handleChangeCurrentStudents")
+    this.setState({
+      currentStudent: this.state.students.find(student =>
+        student.name === event.target.value
+      )
+    })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    // ran out of time
+  }
+
+
   render() {
+    console.log(this.state.allCourses)
+    console.log(this.state.students, "students")
+    console.log(this.state.currentStudent, "currentStudent")
+
+
 
     return (
       <div className="ui grid container">
-      
+
         <div className="ui center aligned header sixteen wide column">
           "Course Title"
         </div>
 
-        <CourseSelector/>
+        <CourseSelector courses={this.state.allCourses} handleChangeCourses={this.handleChangeCourses}/>
 
-        <EditStudent/>
+        <EditStudent handleSubmit={this.handleSubmit} currentStudent={this.state.currentStudent}/>
 
-        <StudentsList/>
+        <StudentsList students={this.state.students} handleChangeCurrentStudents={this.handleChangeCurrentStudents}/>
 
       </div>
     )
