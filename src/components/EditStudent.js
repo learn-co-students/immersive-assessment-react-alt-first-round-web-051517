@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 
 class EditStudent extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      student: {}
+      student: {
+        name: '',
+        class_year: '',
+        percentage: ''
+      }
     }
   }
+
+
 
   render() {
 
@@ -36,7 +42,7 @@ class EditStudent extends Component {
                 placeholder="percentage"
               />
             </div>
-            <button className="ui button" type="submit">Submit</button>
+            <button onSubmit={this.submitStudent} className="ui button" type="submit">Submit</button>
           </div>
         </form>
       </div>

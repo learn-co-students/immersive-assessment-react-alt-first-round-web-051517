@@ -9,52 +9,40 @@ class CourseContainer extends Component {
     super()
 
     this.state = {
-      students: [{
-          id: 1,
-          name: "Tom Foolery",
-          class_year: 10,
-          percentage: 88
-        }, {
-          id: 2,
-          name: "Juno Forte",
-          class_year: 11,
-          percentage: 95
-        }, {
-          id: 3,
-          name: "Eli Frizzel",
-          class_year: 12,
-          percentage: 86
-        }, {
-          id: 4,
-          name: "Phil George",
-          class_year: 9,
-          percentage: 77
-        }, {
-          id: 5,
-          name: "Anna Cornell",
-          class_year: 11,
-          percentage: 98
-        }
-      ],
-      currentCourse: {},
+      students: [],
+      currentCourse: '',
       currentStudent: {}
     }
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3001/students/')
+      .then(res => res.json())
+      .then(json => this.setState({students: json}))
+
+  }
+
+
+  handleCourseChange = (event) => {
+    event.preventDefault()
+    // this.setState({currentCourse: event.target.value})
+    this.setState({currentCourse: event.target.value})
   }
 
   render() {
 
     return (
       <div className="ui grid container">
-      
+
         <div className="ui center aligned header sixteen wide column">
-          "Course Title"
+          {this.state.currentCourse}
         </div>
 
-        <CourseSelector/>
+        <CourseSelector handleChange={this.handleCourseChange} />
 
-        <EditStudent/>
+        <EditStudent student={this.state.currentStudent}/>
 
-        <StudentsList/>
+        <StudentsList students={this.state.students} />
 
       </div>
     )
