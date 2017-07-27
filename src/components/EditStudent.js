@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 
 class EditStudent extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      student: {}
+        student: props.currentStudent
     }
   }
 
+  handleEvent = (event) => {
+    this.setState({
+      student: event.target.value,
+    })
+  }
+
   render() {
+  console.log(this.props.currentStudent)
 
     return (
       <div className="ui center aligned sixteen wide column">
@@ -20,6 +27,8 @@ class EditStudent extends Component {
                 id="name"
                 type="text"
                 placeholder="name"
+                value={this.state.name}
+                onChange={this.handleEvent}
               />
             </div>
             <div className="four wide field">
@@ -27,6 +36,8 @@ class EditStudent extends Component {
                 id="class_year"
                 type="number"
                 placeholder="class year"
+                value={this.state.class_year}
+                onChange={this.handleEvent}
               />
             </div>
             <div className="four wide field">
@@ -34,6 +45,8 @@ class EditStudent extends Component {
                 id="percentage"
                 type="number"
                 placeholder="percentage"
+                value={this.state.percentage}
+                onChange={this.handleEvent}
               />
             </div>
             <button className="ui button" type="submit">Submit</button>
