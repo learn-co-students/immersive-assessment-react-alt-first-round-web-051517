@@ -37,11 +37,40 @@ class CourseContainer extends Component {
         }
       ],
       currentCourse: {},
-      currentStudent: {}
+      currentStudent: { id: 2,
+          name: "Juno Forte",
+          class_year: 11,
+          percentage: 95}
     }
   }
+    // enter into an array
+    ______________________
+    // studentsFetch = () => {
+    //     fetch('http://localhost:3001/courses/5')
+    //         .then(resp => resp.json())
+    //         .then(data => this.setState({
+    //         students: data}))
+    // }
+
+    // componentWillMount() {
+    // this.studentsFetch()
+    // }
+
+  handleCourseSelect = (e) => {
+    this.setState({
+        currentCourse: e.target.value
+    })
+  }
+
+    handleStudentSelect = (e) => {
+        this.setState({
+            currentStudent: e
+        })
+    }
 
   render() {
+
+    console.log(this.state.currentCourse)
 
     return (
       <div className="ui grid container">
@@ -50,11 +79,11 @@ class CourseContainer extends Component {
           "Course Title"
         </div>
 
-        <CourseSelector/>
+        <CourseSelector handleSelect={this.handleCourseSelect}/>
 
-        <EditStudent/>
+        <EditStudent handleStudentSelect={this.handleStudentSelect} currentStudent={this.state.currentStudent}/>
 
-        <StudentsList/>
+        <StudentsList students={this.state.students} editStudent={this.handleStudentSelect} />
 
       </div>
     )
